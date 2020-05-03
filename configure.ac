@@ -27,8 +27,9 @@ fi
 ## ZSTD
 AC_MSG_NOTICE([Configuring zstd library])
 
-AC_SEARCH_LIBS(ZSTD_compress, zstdd,
-    [AC_SUBST([HAS_ZSTD], [1])],
+AC_SEARCH_LIBS(ZSTD_compress, zstd,
+    [AC_SUBST([PKG_LIBS],["${PKG_LIBS} ${LIBS}"])
+     AC_SUBST([HAS_ZSTD], [1])],
     [AC_SUBST([PKG_CFLAGS],["${PKG_CFLAGS} -I'\${ZSTD_SRC_DIR}/lib'"])
      AC_SUBST([PKG_CXXFLAGS],["${PKG_CXXFLAGS} -I'\${ZSTD_BUILD_DIR}/lib'"])
      AC_SUBST([PKG_LIBS],["${PKG_LIBS} \${ZSTD_BUILD_DIR}/lib/libzstd.a"])])

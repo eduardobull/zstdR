@@ -20,10 +20,12 @@ install: clean prepare
 uninstall:
 	$(R) CMD REMOVE zstdR || true
 
+release: clean prepare
+
 clean:
 	$(FIND) . -regex '.*\.s?o$$' -exec rm -v {} \;
 	$(FIND) . -regex '.*\.a$$' -exec rm -v {} \;
 	# $(RM) -rv build/* && $(ECHO) "*\n.gitignore" > build/.gitignore
 	$(RM) -rv autom4te.cache configure config.log config.status src/Makevars ..Rcheck
 
-.PHONY: default build install clean update-all update-lz4 update-zstd
+.PHONY: default build install uninstall clean uninstall

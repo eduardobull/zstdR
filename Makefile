@@ -22,10 +22,13 @@ uninstall:
 
 release: clean prepare
 
+install_remote:
+	$(R) -e "devtools::install_github('eduardobull/zstdR', force = TRUE)"
+
 clean:
 	$(FIND) . -regex '.*\.s?o$$' -exec rm -v {} \;
 	$(FIND) . -regex '.*\.a$$' -exec rm -v {} \;
 	# $(RM) -rv build/* && $(ECHO) "*\n.gitignore" > build/.gitignore
 	$(RM) -rv autom4te.cache configure config.log config.status src/Makevars ..Rcheck
 
-.PHONY: default build install uninstall clean uninstall
+.PHONY: default build clean install uninstall install_remote release

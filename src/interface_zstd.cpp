@@ -1,4 +1,5 @@
 #include <Rcpp.h>
+#include <memory.h>
 #include "zstd.h"
 
 using namespace Rcpp;

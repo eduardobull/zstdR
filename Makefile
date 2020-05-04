@@ -28,7 +28,7 @@ install_remote:
 clean:
 	$(FIND) . -regex '.*\.s?o$$' -exec rm -v {} \;
 	$(FIND) . -regex '.*\.a$$' -exec rm -v {} \;
-	# $(RM) -rv build/* && $(ECHO) "*\n.gitignore" > build/.gitignore
+	$(RM) -rv build/* && $(ECHO) "*\n!.gitignore" > build/.gitignore
 	$(RM) -rv autom4te.cache configure config.log config.status src/Makevars ..Rcheck
 
 .PHONY: default build clean install uninstall install_remote release

@@ -8,24 +8,14 @@ CXX_STD=CXX11
 
 PKG_CFLAGS:=${PKG_CFLAGS} -I'${ZSTD_SRC_DIR}/lib'
 PKG_CXXFLAGS:=${PKG_CXXFLAGS} -I'${ZSTD_SRC_DIR}/lib'
-PKG_LIBS:=${PKG_LIBS} ${ZSTD_BUILD_DIR}/lib/libzstd.a
+PKG_LIBS:=${PKG_LIBS} ${ZSTD_SRC_DIR}/lib/libzstd.a
 
 all: $(SHLIB)
 
-$(SHLIB): ${ZSTD_BUILD_DIR}/lib/libzstd.a
+$(SHLIB): ${ZSTD_SRC_DIR}/lib/libzstd.a
 
-${ZSTD_BUILD_DIR}/lib/libzstd.a:
-	mkdir ${ZSTD_BUILD_DIR} &&\
-		cd ${ZSTD_BUILD_DIR} &&\
-		cmake "${ZSTD_SRC_DIR}/build/cmake/" \
-			-DCMAKE_BUILD_TYPE=Release \
-			-DCMAKE_C_FLAGS="${CFLAGS}" \
-			-DCMAKE_CXX_FLAGS="${CXXFLAGS}" \
-			-DCMAKE_POSITION_INDEPENDENT_CODE=ON \
-			-DZSTD_BUILD_STATIC=ON \
-			-DZSTD_BUILD_SHARED=OFF \
-			-DZSTD_BUILD_PROGRAMS=OFF \
-			-DZSTD_BUILD_TESTS=OFF &&\
-		CC="${CC}" CFLAGS="${CFLAGS}" make
+${ZSTD_SRC_DIR}/lib/libzstd.a:
+	cd ${ZSTD_SRC_DIR}/lib &&\
+		CC="${CC}" CFLAGS="${CFLAGS}" make libzstd.a
 
 .PHONY: all

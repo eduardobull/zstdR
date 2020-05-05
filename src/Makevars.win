@@ -15,7 +15,8 @@ all: $(SHLIB)
 $(SHLIB): ${ZSTD_BUILD_DIR}/lib/libzstd.a
 
 ${ZSTD_BUILD_DIR}/lib/libzstd.a:
-	cd ${ZSTD_BUILD_DIR} &&\
+	mkdir ${ZSTD_BUILD_DIR} &&\
+		cd ${ZSTD_BUILD_DIR} &&\
 		cmake "${ZSTD_SRC_DIR}/build/cmake/" \
 			-DCMAKE_BUILD_TYPE=Release \
 			-DCMAKE_C_FLAGS="${CFLAGS}" \
